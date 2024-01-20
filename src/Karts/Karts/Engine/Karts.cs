@@ -13,8 +13,8 @@ public class Karts : Game
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
-            PreferredBackBufferWidth = 1150,
-            PreferredBackBufferHeight = 1150
+            PreferredBackBufferWidth = 900,
+            PreferredBackBufferHeight = 500
         };
 
         Content.RootDirectory = "./_Content";
@@ -29,6 +29,8 @@ public class Karts : Game
 
     protected override void Initialize()
     {
+        IsMouseVisible = false;
+        
         base.Initialize();
     }
 }
