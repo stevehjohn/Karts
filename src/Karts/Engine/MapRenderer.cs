@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Karts.Engine;
 
@@ -33,6 +34,33 @@ public class MapRenderer
         _map = new Color[Constants.MapSize * Constants.MapSize];
         
         map.GetData(_map);
+    }
+
+    public void Update()
+    {
+        var state = Keyboard.GetState();
+
+        if (state.IsKeyDown(Keys.P))
+        {
+            _angle += 0.02d;
+        }
+
+        if (state.IsKeyDown(Keys.O))
+        {
+            _angle -= 0.02d;
+        }
+
+        if (state.IsKeyDown(Keys.Q))
+        {
+            _position.X += Math.Cos(_angle) * 0.002d;
+            _position.Y += Math.Sin(_angle) * 0.002d;
+        }
+
+        if (state.IsKeyDown(Keys.A))
+        {
+            _position.X -= Math.Cos(_angle) * 0.002d;
+            _position.Y -= Math.Sin(_angle) * 0.002d;
+        }
     }
 
     public void Draw()

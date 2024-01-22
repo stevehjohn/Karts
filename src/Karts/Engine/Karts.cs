@@ -47,6 +47,13 @@ public class Karts : Game
         base.Initialize();
     }
 
+    protected override void Update(GameTime gameTime)
+    {
+        _mapRenderer.Update();
+        
+        base.Update(gameTime);
+    }
+
     protected override void Draw(GameTime gameTime)
     {
         _spriteBatch.Begin();
