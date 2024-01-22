@@ -40,6 +40,36 @@ public class MapRenderer
     {
         var state = Keyboard.GetState();
 
+        if (state.IsKeyDown(Keys.D1))
+        {
+            _fovHalf += 0.005d;
+        }
+
+        if (state.IsKeyDown(Keys.D2))
+        {
+            _fovHalf -= 0.005d;
+        }
+
+        if (state.IsKeyDown(Keys.D3))
+        {
+            _near += 0.0005d;
+        }
+
+        if (state.IsKeyDown(Keys.D4))
+        {
+            _near -= 0.0005d;
+        }
+
+        if (state.IsKeyDown(Keys.D5))
+        {
+            _far += 0.0005d;
+        }
+
+        if (state.IsKeyDown(Keys.D6))
+        {
+            _far -= 0.0005d;
+        }
+
         if (state.IsKeyDown(Keys.P))
         {
             _angle += 0.02d;
@@ -77,7 +107,7 @@ public class MapRenderer
         var nearRightX = _position.X + Math.Cos(_angle + _fovHalf) * _near;
         var nearRightY = _position.Y + Math.Sin(_angle + _fovHalf) * _near;
 
-        for (var y = 0; y < Constants.BufferHeight / 2; y++)
+        for (var y = 0; y < Constants.BufferHeight * 0.75d; y++)
         {
             var sampleDepth = y / (Constants.BufferHeight / 2.0d);
 
@@ -96,7 +126,7 @@ public class MapRenderer
 
                 var pixel = _map[GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize))];
 
-                _buffer[GetBufferPosition(x, y + Constants.BufferHeight / 2)] = pixel;
+                _buffer[GetBufferPosition(x, (int) (y + Constants.BufferHeight * 0.25))] = pixel;
             }
         }
     }
