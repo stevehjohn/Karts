@@ -16,7 +16,7 @@ public class MapRenderer
 
     private double _angle = 0d;
 
-    private double _near = 0.005d;
+    private double _near = 0.0005d;
 
     private double _far = 0.03d;
 
@@ -69,7 +69,7 @@ public class MapRenderer
         {
             _far -= 0.0005d;
         }
-
+        
         if (state.IsKeyDown(Keys.P))
         {
             _angle += 0.02d;
