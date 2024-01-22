@@ -7,13 +7,13 @@ public class Karts : Game
 {
     // ReSharper disable once NotAccessedField.Local
     private GraphicsDeviceManager _graphicsDeviceManager;
-    
+
     private SpriteBatch _spriteBatch;
 
     private readonly Color[] _buffer = new Color[Constants.BufferWidth * Constants.BufferHeight];
 
     private Texture2D _bufferTexture;
-    
+
     public Karts()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
