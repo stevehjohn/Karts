@@ -14,7 +14,7 @@ public class MapRenderer
 
     private (double X, double Y) _position = (1_000d, 1_000d);
 
-    private double _angle = 0d;
+    private double _angle;
 
     private double _near = 0.0005d;
 
