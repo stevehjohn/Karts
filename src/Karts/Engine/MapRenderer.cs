@@ -66,7 +66,9 @@ public class MapRenderer
                 var sampleX = ((endX - startX) * sampleWidth + startX) % 1.0d;
                 var sampleY = ((endY - startY) * sampleWidth + startY) % 1.0d;
 
-                _buffer[GetBufferPosition(x, y + Constants.BufferHeight / 2)] = _map[GetMapPosition(sampleX, sampleY)];
+                var pixel = _map[GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize))];
+
+                _buffer[GetBufferPosition(x, y + Constants.BufferHeight / 2)] = pixel;
             }
         }
     }
@@ -76,8 +78,8 @@ public class MapRenderer
         return y * Constants.BufferWidth + x;
     }
 
-    private int GetMapPosition(double x, double y)
+    private int GetMapPosition(int x, int y)
     {
-        return (int) (y * Constants.MapSize * Constants.MapSize + x * Constants.MapSize);
+        return x + y * Constants.MapSize;
     }
 }
