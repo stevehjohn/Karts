@@ -14,6 +14,8 @@ public class Karts : Game
 
     private Texture2D _bufferTexture;
 
+    private MapRenderer _mapRenderer;
+
     public Karts()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -31,12 +33,16 @@ public class Karts : Game
 
         _bufferTexture = new Texture2D(GraphicsDevice, Constants.BufferWidth, Constants.BufferHeight);
         
+        _mapRenderer.LoadContent(Content);
+        
         base.LoadContent();
     }
 
     protected override void Initialize()
     {
         IsMouseVisible = false;
+
+        _mapRenderer = new MapRenderer(_buffer);
         
         base.Initialize();
     }
@@ -44,6 +50,8 @@ public class Karts : Game
     protected override void Draw(GameTime gameTime)
     {
         _spriteBatch.Begin();
+        
+        _mapRenderer.Draw();
         
         _bufferTexture.SetData(_buffer);
         
