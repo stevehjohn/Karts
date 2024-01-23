@@ -123,7 +123,7 @@ public class MapRenderer
         var nearRightX = _position.X + Math.Cos(_angle + FovHalf) * Near;
         var nearRightY = _position.Y + Math.Sin(_angle + FovHalf) * Near;
 
-        for (var y = 0; y < Constants.BufferHeight * 0.75d; y++)
+        for (var y = 1; y < Constants.BufferHeight * 0.75d; y++)
         {
             var sampleDepth = y / (Constants.BufferHeight / 2.0d);
 
@@ -140,9 +140,18 @@ public class MapRenderer
                 var sampleX = (endX - startX) * sampleWidth + startX;
                 var sampleY = (endY - startY) * sampleWidth + startY;
 
-                var pixel = _map[GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize))];
+                var mapPosition = GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize));
 
-                _buffer[GetBufferPosition(x, (int) (y + Constants.BufferHeight * 0.25))] = pixel;
+                if (mapPosition != null)
+                {
+                    var pixel = _map[mapPosition.Value];
+
+                    _buffer[GetBufferPosition(x, (int) (y + Constants.BufferHeight * 0.25))] = pixel;
+                }
+                else
+                {
+                    _buffer[GetBufferPosition(x, (int) (y + Constants.BufferHeight * 0.25))] = Color.Black;
+                }
             }
         }
     }
@@ -152,11 +161,11 @@ public class MapRenderer
         return y * Constants.BufferWidth + x;
     }
 
-    private int GetMapPosition(int x, int y)
+    private int? GetMapPosition(int x, int y)
     {
         if (x < 0 || x >= Constants.MapSize || y < 0 || y >= Constants.MapSize)
         {
-            return 0;
+            return null;
         }
         
         return x + y * Constants.MapSize;
