@@ -63,7 +63,7 @@ public class MapRenderer
         {
             if (_speed > 0)
             {
-                _speed -= 0.00002d;
+                _speed -= 0.00004d;
             }
         }
         else if (_speed > 0)
