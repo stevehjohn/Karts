@@ -71,7 +71,7 @@ public class Karts : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
         _mapRenderer.Draw();
         
