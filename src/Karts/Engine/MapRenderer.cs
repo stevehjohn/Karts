@@ -12,7 +12,7 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private (double X, double Y) _position = (0.13d, 0.54d);
+    private (double X, double Y) _position = (0.09d, 0.31d);
 
     private double _angle = -Math.PI / 2;
 
@@ -101,6 +101,16 @@ public class MapRenderer
 
     public void Draw()
     {
+        Array.Fill(_buffer, Color.Black);
+
+        for (var x = 0; x < Constants.BufferWidth; x++)
+        {
+            for (var y = 0; y < Constants.BufferHeight; y++)
+            {
+                _buffer[y * Constants.BufferWidth + x] = Color.FromNonPremultiplied(0, 0, 0, 255);
+            }
+        }
+
         var farLeftX = _position.X + Math.Cos(_angle - FovHalf) * Far;
         var farLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Far;
         
@@ -127,8 +137,8 @@ public class MapRenderer
             {
                 var sampleWidth = x / (double) Constants.BufferWidth;
 
-                var sampleX = ((endX - startX) * sampleWidth + startX); // % 1.0d;
-                var sampleY = ((endY - startY) * sampleWidth + startY); // % 1.0d;
+                var sampleX = (endX - startX) * sampleWidth + startX;
+                var sampleY = (endY - startY) * sampleWidth + startY;
 
                 var pixel = _map[GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize))];
 
