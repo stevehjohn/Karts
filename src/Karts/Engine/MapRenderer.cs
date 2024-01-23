@@ -12,9 +12,9 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private (double X, double Y) _position = (1_000d, 1_000d);
+    private (double X, double Y) _position = (1_000.13d, 1_000.54d);
 
-    private double _angle;
+    private double _angle = -Math.PI / 2;
 
     private double _near = 0.0005d;
 
@@ -91,6 +91,8 @@ public class MapRenderer
             _position.X -= Math.Cos(_angle) * 0.002d;
             _position.Y -= Math.Sin(_angle) * 0.002d;
         }
+        
+        Console.WriteLine($"{_position.X}, {_position.Y}");
     }
 
     public void Draw()
