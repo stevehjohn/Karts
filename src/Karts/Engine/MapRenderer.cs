@@ -16,6 +16,8 @@ public class MapRenderer
 
     private double _angle = -Math.PI / 2;
 
+    private double _speed;
+    
     private const double Near = 0.0005d;
 
     private const double Far = 0.03d;
@@ -52,15 +54,25 @@ public class MapRenderer
 
         if (state.IsKeyDown(Keys.Q))
         {
-            _position.X += Math.Cos(_angle) * 0.002d;
-            _position.Y += Math.Sin(_angle) * 0.002d;
+            if (_speed < 0.004d)
+            {
+                _speed += 0.00001d;
+            }
+        }
+        else if (state.IsKeyDown(Keys.A))
+        {
+            if (_speed > 0)
+            {
+                _speed -= 0.00002d;
+            }
+        }
+        else if (_speed > 0)
+        {
+            _speed -= 0.00001d;
         }
 
-        if (state.IsKeyDown(Keys.A))
-        {
-            _position.X -= Math.Cos(_angle) * 0.002d;
-            _position.Y -= Math.Sin(_angle) * 0.002d;
-        }
+        _position.X += Math.Cos(_angle) * _speed;
+        _position.Y += Math.Sin(_angle) * _speed;
     }
 
     public void Draw()
