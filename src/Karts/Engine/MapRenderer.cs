@@ -12,7 +12,7 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private (double X, double Y) _position = (1_000.13d, 1_000.54d);
+    private (double X, double Y) _position = (0.13d, 0.54d);
 
     private double _angle = -Math.PI / 2;
 
@@ -127,8 +127,8 @@ public class MapRenderer
             {
                 var sampleWidth = x / (double) Constants.BufferWidth;
 
-                var sampleX = ((endX - startX) * sampleWidth + startX) % 1.0d;
-                var sampleY = ((endY - startY) * sampleWidth + startY) % 1.0d;
+                var sampleX = ((endX - startX) * sampleWidth + startX); // % 1.0d;
+                var sampleY = ((endY - startY) * sampleWidth + startY); // % 1.0d;
 
                 var pixel = _map[GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize))];
 
@@ -144,6 +144,11 @@ public class MapRenderer
 
     private int GetMapPosition(int x, int y)
     {
+        if (x < 0 || x >= Constants.MapSize || y < 0 || y >= Constants.MapSize)
+        {
+            return 0;
+        }
+        
         return x + y * Constants.MapSize;
     }
 }
