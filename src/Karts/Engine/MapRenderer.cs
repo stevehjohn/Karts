@@ -16,12 +16,12 @@ public class MapRenderer
 
     private double _angle = -Math.PI / 2;
 
-    private double _near = 0.0005d;
+    private const double Near = 0.0005d;
 
-    private double _far = 0.03d;
+    private const double Far = 0.03d;
 
-    private double _fovHalf = Math.PI / 4.0d;
-    
+    private const double FovHalf = Math.PI / 4.0d;
+
     public MapRenderer(Color[] buffer)
     {
         _buffer = buffer;
@@ -65,17 +65,17 @@ public class MapRenderer
 
     public void Draw()
     {
-        var farLeftX = _position.X + Math.Cos(_angle - _fovHalf) * _far;
-        var farLeftY = _position.Y + Math.Sin(_angle - _fovHalf) * _far;
+        var farLeftX = _position.X + Math.Cos(_angle - FovHalf) * Far;
+        var farLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Far;
         
-        var nearLeftX = _position.X + Math.Cos(_angle - _fovHalf) * _near;
-        var nearLeftY = _position.Y + Math.Sin(_angle - _fovHalf) * _near;
+        var nearLeftX = _position.X + Math.Cos(_angle - FovHalf) * Near;
+        var nearLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Near;
         
-        var farRightX = _position.X + Math.Cos(_angle + _fovHalf) * _far;
-        var farRightY = _position.Y + Math.Sin(_angle + _fovHalf) * _far;
+        var farRightX = _position.X + Math.Cos(_angle + FovHalf) * Far;
+        var farRightY = _position.Y + Math.Sin(_angle + FovHalf) * Far;
         
-        var nearRightX = _position.X + Math.Cos(_angle + _fovHalf) * _near;
-        var nearRightY = _position.Y + Math.Sin(_angle + _fovHalf) * _near;
+        var nearRightX = _position.X + Math.Cos(_angle + FovHalf) * Near;
+        var nearRightY = _position.Y + Math.Sin(_angle + FovHalf) * Near;
 
         for (var y = 0; y < Constants.BufferHeight * 0.75d; y++)
         {
