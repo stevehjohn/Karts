@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Karts.Engine;
 
-public class MapRenderer : IActor
+public class MapRenderer
 {
     private readonly Color[] _buffer;
 

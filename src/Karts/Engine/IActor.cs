@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Karts.Engine;
 
@@ -8,5 +9,5 @@ public interface IActor
 
     void Update();
     
-    void Draw();
+    void Draw(SpriteBatch spriteBatch);
 }

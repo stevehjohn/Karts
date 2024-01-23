@@ -15,8 +15,10 @@ public class Karts : Game
 
     private Texture2D _bufferTexture;
 
-    private readonly List<IActor> _actors = [];
+    private readonly List<IActor> _actors = new();
 
+    private MapRenderer _mapRenderer;
+    
     public Karts()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -31,8 +33,8 @@ public class Karts : Game
     protected override void Initialize()
     {
         IsMouseVisible = false;
-        
-        _actors.Add(new MapRenderer(_buffer));
+
+        _mapRenderer = new MapRenderer(_buffer);
         
         _actors.Add(new Karter());
         
@@ -45,6 +47,8 @@ public class Karts : Game
 
         _bufferTexture = new Texture2D(GraphicsDevice, Constants.BufferWidth, Constants.BufferHeight);
 
+        _mapRenderer.LoadContent(Content);
+        
         foreach (var actor in _actors)
         {
             actor.LoadContent(Content);
@@ -55,6 +59,8 @@ public class Karts : Game
 
     protected override void Update(GameTime gameTime)
     {
+        _mapRenderer.Update();
+        
         foreach (var actor in _actors)
         {
             actor.Update();
@@ -67,15 +73,17 @@ public class Karts : Game
     {
         _spriteBatch.Begin();
 
-        foreach (var actor in _actors)
-        {
-            actor.Draw();
-        }
+        _mapRenderer.Draw();
         
         _bufferTexture.SetData(_buffer);
         
         _spriteBatch.Draw(_bufferTexture, new Vector2(0, 0), new Rectangle(0, 0, Constants.BufferWidth, Constants.BufferHeight), Color.White);
         
+        foreach (var actor in _actors)
+        {
+            actor.Draw(_spriteBatch);
+        }
+
         _spriteBatch.End();
         
         base.Draw(gameTime);
