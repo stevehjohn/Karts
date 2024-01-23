@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,7 +15,7 @@ public class Karts : Game
 
     private Texture2D _bufferTexture;
 
-    private MapRenderer _mapRenderer;
+    private readonly List<IActor> _actors = [];
 
     public Karts()
     {
@@ -26,30 +27,38 @@ public class Karts : Game
 
         Content.RootDirectory = "./_Content";
     }
+
+    protected override void Initialize()
+    {
+        IsMouseVisible = false;
+        
+        _actors.Add(new MapRenderer(_buffer));
+        
+        _actors.Add(new Karter());
+        
+        base.Initialize();
+    }
     
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         _bufferTexture = new Texture2D(GraphicsDevice, Constants.BufferWidth, Constants.BufferHeight);
-        
-        _mapRenderer.LoadContent(Content);
+
+        foreach (var actor in _actors)
+        {
+            actor.LoadContent(Content);
+        }
         
         base.LoadContent();
     }
 
-    protected override void Initialize()
-    {
-        IsMouseVisible = false;
-
-        _mapRenderer = new MapRenderer(_buffer);
-        
-        base.Initialize();
-    }
-
     protected override void Update(GameTime gameTime)
     {
-        _mapRenderer.Update();
+        foreach (var actor in _actors)
+        {
+            actor.Update();
+        }
         
         base.Update(gameTime);
     }
@@ -57,8 +66,11 @@ public class Karts : Game
     protected override void Draw(GameTime gameTime)
     {
         _spriteBatch.Begin();
-        
-        _mapRenderer.Draw();
+
+        foreach (var actor in _actors)
+        {
+            actor.Draw();
+        }
         
         _bufferTexture.SetData(_buffer);
         
