@@ -91,8 +91,6 @@ public class MapRenderer
             _position.X -= Math.Cos(_angle) * 0.002d;
             _position.Y -= Math.Sin(_angle) * 0.002d;
         }
-        
-        Console.WriteLine($"{_position.X}, {_position.Y}");
     }
 
     public void Draw()
