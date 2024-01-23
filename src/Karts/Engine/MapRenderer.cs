@@ -16,7 +16,8 @@ public class MapRenderer
 
     private double _angle = -Math.PI / 2;
 
-    private double _angleDelta;
+    // TODO: Urgh.
+    public static double AngleDelta;
 
     private double _speed;
     
@@ -46,27 +47,27 @@ public class MapRenderer
         
         if (state.IsKeyDown(Keys.P))
         {
-            if (_angleDelta < 0.02d)
+            if (AngleDelta < 0.02d)
             {
-                _angleDelta += 0.0005d;
+                AngleDelta += 0.0005d;
             }
         }
         else if (state.IsKeyDown(Keys.O))
         {
-            if (_angleDelta > -0.02d)
+            if (AngleDelta > -0.02d)
             {
-                _angleDelta -= 0.0005d;
+                AngleDelta -= 0.0005d;
             }
         }
         else
         {
-            if (_angleDelta > 0)
+            if (AngleDelta > 0)
             {
-                _angleDelta -= 0.001d;
+                AngleDelta -= 0.001d;
             }
-            else if (_angleDelta < 0)
+            else if (AngleDelta < 0)
             {
-                _angleDelta += 0.001d;
+                AngleDelta += 0.001d;
             }
         }
 
@@ -94,7 +95,7 @@ public class MapRenderer
 
         if (_speed > 0)
         {
-            _angle += _angleDelta;
+            _angle += AngleDelta;
         }
     }
 
