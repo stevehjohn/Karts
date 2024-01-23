@@ -39,36 +39,6 @@ public class MapRenderer
     public void Update()
     {
         var state = Keyboard.GetState();
-
-        if (state.IsKeyDown(Keys.D1))
-        {
-            _fovHalf += 0.005d;
-        }
-
-        if (state.IsKeyDown(Keys.D2))
-        {
-            _fovHalf -= 0.005d;
-        }
-
-        if (state.IsKeyDown(Keys.D3))
-        {
-            _near += 0.0005d;
-        }
-
-        if (state.IsKeyDown(Keys.D4))
-        {
-            _near -= 0.0005d;
-        }
-
-        if (state.IsKeyDown(Keys.D5))
-        {
-            _far += 0.0005d;
-        }
-
-        if (state.IsKeyDown(Keys.D6))
-        {
-            _far -= 0.0005d;
-        }
         
         if (state.IsKeyDown(Keys.P))
         {
