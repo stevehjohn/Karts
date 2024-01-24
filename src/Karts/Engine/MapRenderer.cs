@@ -20,7 +20,7 @@ public class MapRenderer
     public static double AngleDelta;
 
     private double _speed;
-    
+
     private const double Near = 0.0005d;
 
     private const double Far = 0.03d;
