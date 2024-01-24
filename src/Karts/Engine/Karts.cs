@@ -18,7 +18,7 @@ public class Karts : Game
     private readonly List<IActor> _actors = new();
 
     private MapRenderer _mapRenderer;
-    
+
     public Karts()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
