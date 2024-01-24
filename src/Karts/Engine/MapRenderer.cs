@@ -12,7 +12,7 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private (double X, double Y) _position = (0.09d, 0.31d);
+    private (double X, double Y) _position = (0.11d, 0.56d);
 
     private double _angle = -Math.PI / 2;
 
