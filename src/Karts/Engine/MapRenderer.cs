@@ -43,13 +43,13 @@ public class MapRenderer
     {
         Array.Fill(_buffer, Color.Black);
 
-        var farLeft = _player.Position.MoveBy(_player.Angle - FovHalf, Far);
+        var farLeft = _player.Position.MoveBy(_player.Direction - FovHalf, Far);
 
-        var nearLeft = _player.Position.MoveBy(_player.Angle - FovHalf, Near);
+        var nearLeft = _player.Position.MoveBy(_player.Direction - FovHalf, Near);
 
-        var farRight = _player.Position.MoveBy(_player.Angle + FovHalf, Far);
+        var farRight = _player.Position.MoveBy(_player.Direction + FovHalf, Far);
 
-        var nearRight = _player.Position.MoveBy(_player.Angle + FovHalf, Near);
+        var nearRight = _player.Position.MoveBy(_player.Direction + FovHalf, Near);
         
         for (var y = 1; y < Constants.BufferHeight * 0.75d; y++)
         {

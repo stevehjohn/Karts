@@ -4,7 +4,7 @@ namespace Karts.Engine;
 
 public class Player
 {
-    public double Angle { get; private set; }
+    public double Direction { get; private set; }
     
     public double SteeringAngle { get; private set; }
 
@@ -62,11 +62,11 @@ public class Player
             _speed -= 0.00001d;
         }
 
-        Position = Position.MoveBy(SteeringAngle, _speed);
+        Position = Position.MoveBy(Direction, _speed);
 
         if (_speed > 0)
         {
-            Angle += SteeringAngle;
+            Direction += SteeringAngle;
         }
     }
 }
