@@ -34,7 +34,7 @@ public class MapRenderer
 
     public void LoadContent(ContentManager contentManager)
     {
-        var map = contentManager.Load<Texture2D>("map-1");
+        var map = contentManager.Load<Texture2D>("map-4");
 
         _map = new Color[Constants.MapSize * Constants.MapSize];
         
