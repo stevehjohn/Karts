@@ -1,10 +1,11 @@
+using System;
 using Microsoft.Xna.Framework.Input;
 
 namespace Karts.Engine;
 
 public class Player
 {
-    public double Direction { get; private set; }
+    public double Direction { get; private set; } = -Math.PI / 2;
     
     public double SteeringAngle { get; private set; }
 
