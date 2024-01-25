@@ -34,7 +34,7 @@ public class MapRenderer
 
     public void LoadContent(ContentManager contentManager)
     {
-        var map = contentManager.Load<Texture2D>("map-4");
+        var map = contentManager.Load<Texture2D>("map-2");
 
         _map = new Color[Constants.MapSize * Constants.MapSize];
         
@@ -102,14 +102,6 @@ public class MapRenderer
     public void Draw()
     {
         Array.Fill(_buffer, Color.Black);
-
-        for (var x = 0; x < Constants.BufferWidth; x++)
-        {
-            for (var y = 0; y < Constants.BufferHeight; y++)
-            {
-                _buffer[y * Constants.BufferWidth + x] = Color.FromNonPremultiplied(0, 0, 0, 255);
-            }
-        }
 
         var farLeftX = _position.X + Math.Cos(_angle - FovHalf) * Far;
         var farLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Far;
