@@ -12,7 +12,7 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private Point2D _position = new Point2D(0.11d, 0.56d);
+    private Point2D _position = new(0.11d, 0.56d);
     
     private double _angle = -Math.PI / 2;
 
