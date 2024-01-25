@@ -12,8 +12,8 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private (double X, double Y) _position = (0.11d, 0.56d);
-
+    private Point2D _position = new Point2D(0.11d, 0.56d);
+    
     private double _angle = -Math.PI / 2;
 
     // TODO: Urgh.
@@ -90,8 +90,7 @@ public class MapRenderer
             _speed -= 0.00001d;
         }
 
-        _position.X += Math.Cos(_angle) * _speed;
-        _position.Y += Math.Sin(_angle) * _speed;
+        _position = _position.MoveBy(_angle, _speed);
 
         if (_speed > 0)
         {
@@ -111,36 +110,29 @@ public class MapRenderer
             }
         }
 
-        var farLeftX = _position.X + Math.Cos(_angle - FovHalf) * Far;
-        var farLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Far;
-        
-        var nearLeftX = _position.X + Math.Cos(_angle - FovHalf) * Near;
-        var nearLeftY = _position.Y + Math.Sin(_angle - FovHalf) * Near;
-        
-        var farRightX = _position.X + Math.Cos(_angle + FovHalf) * Far;
-        var farRightY = _position.Y + Math.Sin(_angle + FovHalf) * Far;
-        
-        var nearRightX = _position.X + Math.Cos(_angle + FovHalf) * Near;
-        var nearRightY = _position.Y + Math.Sin(_angle + FovHalf) * Near;
+        var farLeft = _position.MoveBy(_angle - FovHalf, Far);
 
+        var nearLeft = _position.MoveBy(_angle - FovHalf, Near);
+
+        var farRight = _position.MoveBy(_angle + FovHalf, Far);
+
+        var nearRight = _position.MoveBy(_angle + FovHalf, Near);
+        
         for (var y = 1; y < Constants.BufferHeight * 0.75d; y++)
         {
             var sampleDepth = y / (Constants.BufferHeight / 2.0d);
 
-            var startX = (farLeftX - nearLeftX) / sampleDepth + nearLeftX;
-            var startY = (farLeftY - nearLeftY) / sampleDepth + nearLeftY;
-            
-            var endX = (farRightX - nearRightX) / sampleDepth + nearRightX;
-            var endY = (farRightY - nearRightY) / sampleDepth + nearRightY;
+            var start = (farLeft - nearLeft) / sampleDepth + nearLeft;
 
+            var end = (farRight - nearRight) / sampleDepth + nearRight;
+            
             for (var x = 0; x < Constants.BufferWidth; x++)
             {
                 var sampleWidth = x / (double) Constants.BufferWidth;
 
-                var sampleX = (endX - startX) * sampleWidth + startX;
-                var sampleY = (endY - startY) * sampleWidth + startY;
-
-                var mapPosition = GetMapPosition((int) (sampleX * Constants.MapSize), (int) (sampleY * Constants.MapSize));
+                var sample = (end - start) * sampleWidth + start;
+                
+                var mapPosition = GetMapPosition((int) (sample.X * Constants.MapSize), (int) (sample.Y * Constants.MapSize));
 
                 if (mapPosition != null)
                 {
