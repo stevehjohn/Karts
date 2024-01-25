@@ -2,7 +2,6 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Karts.Engine;
 
@@ -12,24 +11,19 @@ public class MapRenderer
 
     private Color[] _map;
 
-    private Point2D _position = new(0.11d, 0.56d);
-    
-    private double _angle = -Math.PI / 2;
-
-    // TODO: Urgh.
-    public static double AngleDelta;
-
-    private double _speed;
-
     private const double Near = 0.0005d;
 
     private const double Far = 0.03d;
 
     private const double FovHalf = Math.PI / 4.0d;
 
-    public MapRenderer(Color[] buffer)
+    private readonly Player _player;
+
+    public MapRenderer(Color[] buffer, Player player)
     {
         _buffer = buffer;
+
+        _player = player;
     }
 
     public void LoadContent(ContentManager contentManager)
@@ -41,75 +35,21 @@ public class MapRenderer
         map.GetData(_map);
     }
 
-    public void Update()
+    public static void Update()
     {
-        var state = Keyboard.GetState();
-        
-        if (state.IsKeyDown(Keys.P))
-        {
-            if (AngleDelta < 0.02d)
-            {
-                AngleDelta += 0.0005d;
-            }
-        }
-        else if (state.IsKeyDown(Keys.O))
-        {
-            if (AngleDelta > -0.02d)
-            {
-                AngleDelta -= 0.0005d;
-            }
-        }
-        else
-        {
-            switch (AngleDelta)
-            {
-                case > 0:
-                    AngleDelta -= 0.001d;
-                    break;
-                case < 0:
-                    AngleDelta += 0.001d;
-                    break;
-            }
-        }
-
-        if (state.IsKeyDown(Keys.Q))
-        {
-            if (_speed < 0.004d)
-            {
-                _speed += 0.00001d;
-            }
-        }
-        else if (state.IsKeyDown(Keys.A))
-        {
-            if (_speed > 0)
-            {
-                _speed -= 0.00004d;
-            }
-        }
-        else if (_speed > 0)
-        {
-            _speed -= 0.00001d;
-        }
-
-        _position = _position.MoveBy(_angle, _speed);
-
-        if (_speed > 0)
-        {
-            _angle += AngleDelta;
-        }
     }
 
     public void Draw()
     {
         Array.Fill(_buffer, Color.Black);
 
-        var farLeft = _position.MoveBy(_angle - FovHalf, Far);
+        var farLeft = _player.Position.MoveBy(_player.Angle - FovHalf, Far);
 
-        var nearLeft = _position.MoveBy(_angle - FovHalf, Near);
+        var nearLeft = _player.Position.MoveBy(_player.Angle - FovHalf, Near);
 
-        var farRight = _position.MoveBy(_angle + FovHalf, Far);
+        var farRight = _player.Position.MoveBy(_player.Angle + FovHalf, Far);
 
-        var nearRight = _position.MoveBy(_angle + FovHalf, Near);
+        var nearRight = _player.Position.MoveBy(_player.Angle + FovHalf, Near);
         
         for (var y = 1; y < Constants.BufferHeight * 0.75d; y++)
         {

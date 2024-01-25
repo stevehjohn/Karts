@@ -19,6 +19,8 @@ public class Karts : Game
 
     private MapRenderer _mapRenderer;
 
+    private Player _player;
+
     public Karts()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -34,9 +36,11 @@ public class Karts : Game
     {
         IsMouseVisible = false;
 
-        _mapRenderer = new MapRenderer(_buffer);
+        _player = new Player();
         
-        _actors.Add(new Karter());
+        _mapRenderer = new MapRenderer(_buffer, _player);
+        
+        _actors.Add(new Karter(_player));
         
         base.Initialize();
     }
@@ -59,7 +63,9 @@ public class Karts : Game
 
     protected override void Update(GameTime gameTime)
     {
-        _mapRenderer.Update();
+        _player.Update();
+        
+        MapRenderer.Update();
         
         foreach (var actor in _actors)
         {

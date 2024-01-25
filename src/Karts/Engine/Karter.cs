@@ -14,6 +14,13 @@ public class Karter : IActor
     private readonly Random _rng = new();
 
     private int _frame;
+
+    private readonly Player _player;
+
+    public Karter(Player player)
+    {
+        _player = player;
+    }
     
     public void LoadContent(ContentManager contentManager)
     {
@@ -32,7 +39,7 @@ public class Karter : IActor
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        var delta = Math.Abs(MapRenderer.AngleDelta);
+        var delta = Math.Abs(_player.SteeringAngle);
 
         int offset = delta switch
         {
@@ -42,7 +49,7 @@ public class Karter : IActor
             _ => 3
         };
 
-        var effect = MapRenderer.AngleDelta < -0.005d
+        var effect = _player.SteeringAngle < -0.005d
             ? SpriteEffects.FlipHorizontally
             : SpriteEffects.None;
 
