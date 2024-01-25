@@ -4,24 +4,20 @@ namespace Karts.Engine;
 
 public class Point2D
 {
-    private readonly double _x;
+    public double X { get; }
 
-    private readonly double _y;
+    public double Y { get; }
 
-    public double X => _x;
-
-    public double Y => _y;
-    
     public Point2D(double x, double y)
     {
-        _x = x;
+        X = x;
         
-        _y = y;
+        Y = y;
     }
 
     public Point2D MoveBy(double angle, double distance)
     {
-        return new Point2D(_x + Math.Cos(angle) * distance, _y + Math.Sin(angle) * distance);
+        return new Point2D(X + Math.Cos(angle) * distance, Y + Math.Sin(angle) * distance);
     }
 
     public static Point2D operator + (Point2D left, Point2D right)

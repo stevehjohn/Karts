@@ -61,13 +61,14 @@ public class MapRenderer
         }
         else
         {
-            if (AngleDelta > 0)
+            switch (AngleDelta)
             {
-                AngleDelta -= 0.001d;
-            }
-            else if (AngleDelta < 0)
-            {
-                AngleDelta += 0.001d;
+                case > 0:
+                    AngleDelta -= 0.001d;
+                    break;
+                case < 0:
+                    AngleDelta += 0.001d;
+                    break;
             }
         }
 
@@ -140,12 +141,12 @@ public class MapRenderer
         }
     }
 
-    private int GetBufferPosition(int x, int y)
+    private static int GetBufferPosition(int x, int y)
     {
         return y * Constants.BufferWidth + x;
     }
 
-    private int? GetMapPosition(int x, int y)
+    private static int? GetMapPosition(int x, int y)
     {
         if (x < 0 || x >= Constants.MapSize || y < 0 || y >= Constants.MapSize)
         {

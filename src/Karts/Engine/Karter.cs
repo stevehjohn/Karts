@@ -34,24 +34,13 @@ public class Karter : IActor
     {
         var delta = Math.Abs(MapRenderer.AngleDelta);
 
-        int offset;
-        
-        if (delta < 0.005d)
+        int offset = delta switch
         {
-            offset = 0;
-        }
-        else if (delta < 0.01d)
-        {
-            offset = 1;
-        }
-        else if (delta < 0.015d)
-        {
-            offset = 2;
-        }
-        else
-        {
-            offset = 3;
-        }
+            < 0.005d => 0,
+            < 0.01d => 1,
+            < 0.015d => 2,
+            _ => 3
+        };
 
         var effect = MapRenderer.AngleDelta < -0.005d
             ? SpriteEffects.FlipHorizontally
