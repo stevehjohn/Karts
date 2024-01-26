@@ -35,10 +35,6 @@ public class MapRenderer
         map.GetData(_map);
     }
 
-    public void Update()
-    {
-    }
-
     public void Draw()
     {
         Array.Fill(_buffer, Color.Black);
