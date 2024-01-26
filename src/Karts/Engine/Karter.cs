@@ -41,7 +41,7 @@ public class Karter : IActor
     {
         var delta = Math.Abs(_player.SteeringAngle);
 
-        int offset = delta switch
+        var offset = delta switch
         {
             < 0.005d => 0,
             < 0.01d => 1,
