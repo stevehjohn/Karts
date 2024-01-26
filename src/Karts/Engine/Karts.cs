@@ -15,7 +15,7 @@ public class Karts : Game
 
     private Texture2D _bufferTexture;
 
-    private readonly List<IActor> _actors = [];
+    private readonly List<IActor> _actors = new();
 
     private MapRenderer _mapRenderer;
 
