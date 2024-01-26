@@ -65,7 +65,7 @@ public class Karts : Game
     {
         _player.Update();
         
-        MapRenderer.Update();
+        _mapRenderer.Update();
         
         foreach (var actor in _actors)
         {

@@ -56,11 +56,11 @@ public class Karter : IActor
         // ReSharper disable once PossibleLossOfFraction
         spriteBatch.Draw(
             _texture,
-            new Vector2(Constants.BufferWidth / 2 - 64, (int) (Constants.BufferHeight * .65) + _offset),
+            new Vector2(Constants.BufferWidth / 2 - 32, (int) (Constants.BufferHeight * .85) + _offset),
             new Rectangle(offset * 33, 0, 31, 31), Color.White,
             0f,
             Vector2.Zero,
-            new Vector2(4, 4),
+            new Vector2(2, 2),
             effect,
             0f);
     }

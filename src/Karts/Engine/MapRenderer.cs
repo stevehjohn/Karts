@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Karts.Engine;
 
@@ -13,7 +14,7 @@ public class MapRenderer
 
     private const double Near = 0.0005d;
 
-    private const double Far = 0.03d;
+    private const double Far = 0.12d;
 
     private const double FovHalf = Math.PI / 4.0d;
 
@@ -35,7 +36,7 @@ public class MapRenderer
         map.GetData(_map);
     }
 
-    public static void Update()
+    public void Update()
     {
     }
 
